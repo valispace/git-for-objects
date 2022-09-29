@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Requirement } from '../types';
+import { Branch, Requirement } from '../types';
+import { CommitsService } from './commits.service';
 
 @Component({
   selector: 'app-form',
@@ -8,19 +9,30 @@ import { Requirement } from '../types';
 })
 export class FormComponent implements OnInit {
 
+  branch: Branch = {
+    name: 'Default',
+    commitId: null
+  }
+
+  prev: Requirement = {
+    title: 'Iso thing ',
+    text: 'The thing shall do the x thing',
+    state: 'draft',
+  };
+
   req: Requirement = {
     title: 'Iso thing ',
     text: 'The thing shall do the x thing',
     state: 'draft',
   };
 
-  constructor() { }
+  constructor(public commitsService: CommitsService) { }
 
   ngOnInit(): void {
   }
 
 
   save(): void {
-    alert('save');
+    this.commitsService.createCommit(this.prev, this.req, this.branch);
   }
 }

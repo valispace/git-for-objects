@@ -8,6 +8,12 @@ export interface Requirement {
 
 export interface Commit {
   id: number,
-  json: string,
+  revertJson: string,
+  applyJson: string,
   parentId?: number,
+}
+
+export interface Branch {
+  name: string,
+  commitId: number,
 }
