@@ -1,6 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
 
 import * as GitgraphJS from '@gitgraph/js';
+import { Branch } from '@gitgraph/js';
+import { Commit } from '../types';
 
 @Component({
   selector: 'app-chart',
@@ -8,7 +10,22 @@ import * as GitgraphJS from '@gitgraph/js';
   styleUrls: ['./chart.component.scss']
 })
 export class AppChartComponent implements AfterViewInit{
-  
+
+  data: any[] = [
+    {
+      id: 0,
+      type: "branch",
+      name: "CC-001",
+    },
+    {
+      id: 0,
+      type: "commit",
+      branchId: 0,
+      author: "Luís Pereira <luis@valispace.com>",
+      subject: "Initial commit",
+    }
+  ];
+
   ngAfterViewInit(): void {
     const graphContainer = document.getElementById("graph-container");
 
