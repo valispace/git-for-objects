@@ -3,8 +3,7 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import * as GitgraphJS from '@gitgraph/js';
 import { Subscription } from 'rxjs';
 
-import { BranchesService } from '../_core/branches/branches.service';
-import { CommitsService } from '../_core/commits/commits.service';
+import { SharedService } from '../_core/shared/shared.service';
 
 @Component({
   selector: 'app-chart',
@@ -19,15 +18,12 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
   graphContainer: HTMLElement;
   gitgraph: any;
 
-  constructor(
-    public branchesService: BranchesService,
-    public commitsService: CommitsService,
-  ) {}
+  constructor(public sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.subscriptions = [
-      this.branchesService.branches$.subscribe(() => this.updateGraph()),
-      this.commitsService.commits$.subscribe(() => this.updateGraph())
+      this.sharedService.branches$.subscribe(() => this.updateGraph()),
+      this.sharedService.commits$.subscribe(() => this.updateGraph())
     ];
   }
 
@@ -39,8 +35,8 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
 
   updateGraph(): void {
     const data: any[] = [
-      ...this.branchesService.branches,
-      ...this.commitsService.commits
+      ...this.sharedService.branches,
+      ...this.sharedService.commits
     ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
     this.gitgraph.clear();

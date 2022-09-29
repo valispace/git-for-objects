@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Branch } from '../_core/branches/branches';
-import { CommitsService } from '../_core/commits/commits.service';
 import { Requirement } from '../_core/requirements/requirements';
+import { SharedService } from '../_core/shared/shared.service';
 
 @Component({
   selector: 'app-form',
@@ -15,20 +14,20 @@ export class FormComponent implements OnInit {
 
   req: Requirement;
 
-  constructor(public commitsService: CommitsService) { }
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit(): void {
 
     this.loadReq({});
 
-    this.commitsService.reqChange.subscribe(req => {
+    this.sharedService.reqChange.subscribe(req => {
       this.loadReq(req);
     })
   }
 
 
   save(): void {
-    this.commitsService.createCommit(this.prev, this.req);
+    this.sharedService.createCommit(this.sharedService.currBranch, this.prev, this.req);
     this.loadReq(this.req);
   }
 

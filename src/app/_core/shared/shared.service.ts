@@ -1,17 +1,26 @@
-import { Observable, Subject } from "rxjs";
 import { EventEmitter, Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
-import { Requirement } from "../requirements/requirements";
 import { Branch } from "../branches/branches";
-import { Commit } from "./commits";
+import { Commit } from "../commits/commits";
+import { Requirement } from "../requirements/requirements";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommitsService {
+export class SharedService {
+
+  private _branches: Subject<Branch[]> = new Subject();
+  public readonly branches$: Observable<Branch[]> = this._branches.asObservable();
+
+  private _commits: Subject<Commit[]> = new Subject();
+  public readonly commits$: Observable<Commit[]> = this._commits.asObservable();
 
   reqChange = new EventEmitter<Requirement>();
+
+  currBranch: Branch;
+  currCommit: Commit;
 
   branches: Branch[] = [
     {
@@ -43,7 +52,6 @@ export class CommitsService {
       date: new Date(new Date().getDate() + 6),
     }
   ];
-
   commits: Commit[] = [
     {
       id: 1,
@@ -135,24 +143,35 @@ export class CommitsService {
     }
   ];
 
-  currBranch: Branch = this.branches[0];
-  currCommit: Commit;
+  checkoutBranch(branch: Branch): void {
+    const commit = this.commits.find(c => c.id === branch.commitId);
+    this.checkoutCommit(commit);
+    this.currBranch = branch;
+  }
 
-  private _commits: Subject<Commit[]> = new Subject();
-  public readonly commits$: Observable<Commit[]> = this._commits.asObservable();
+  createBranch(commit: Commit, name: string) {
+    const branch: Branch = {
+      id: (this.branches.at(-1)?.id ?? 0) + 1,
+      type: 'branch',
+      name,
+      commitId: commit.id,
+      date: new Date()
+    };
 
-  constructor() { }
+    this.branches = [...this.branches, branch];
 
-  createCommit(prev: Requirement, next: Requirement) {
+    this.checkoutBranch(branch);
+  }
 
+  createCommit(branch: Branch, prev: Requirement, next: Requirement) {
     const [revertJson, applyJson] = this.difference(prev, next);
 
     const commit: Commit = {
       id: (this.commits.at(-1)?.id ?? 0) + 1,
       // revertJson,
       applyJson,
-      parentId: this.currBranch.commitId,
-      branchId: this.currBranch.id,
+      parentId: branch.commitId,
+      branchId: branch.id,
       type: "commit",
       author: "Luís <luis@valispace.com>",
       subject: "...",
@@ -161,14 +180,12 @@ export class CommitsService {
 
     this.commits = [...this.commits, commit];
 
-    this.currBranch.commitId = commit.id;
+    branch.commitId = commit.id;
     this.currCommit = commit;
     this._commits.next(this.commits);
   }
 
-
   difference(prev: any, next: any): [any, any] {
-
     const revertJson: any = {};
     const applyJson: any = {};
 
@@ -185,7 +202,6 @@ export class CommitsService {
   }
 
   checkoutCommit(commit: Commit): void {
-
     this.currBranch = this.branches.find(b => b.id === commit.branchId);
     this.currCommit = commit;
 
@@ -206,26 +222,4 @@ export class CommitsService {
 
     this.reqChange.emit(req);
   }
-
-  checkoutBranch(branch: Branch): void {
-    const commit = this.commits.find(c => c.id === branch.commitId);
-    this.checkoutCommit(commit);
-    this.currBranch = branch;
-  }
-
-  createBranch(name: string) {
-
-    const branch: Branch = {
-      id: (this.branches.at(-1)?.id ?? 0) + 1,
-      type: 'branch',
-      name,
-      commitId: this.currCommit.id,
-      date: new Date()
-    };
-
-    this.branches = [...this.branches, branch];
-
-    this.checkoutBranch(branch);
-  }
-
 }

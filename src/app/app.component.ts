@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CommitsService } from './_core/commits/commits.service';
+
+import { SharedService } from './_core/shared/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import { CommitsService } from './_core/commits/commits.service';
 })
 export class AppComponent {
 
-  constructor(public commitsService: CommitsService) { }
-
+  constructor(public sharedService: SharedService) { }
 
 }

@@ -1,5 +1,5 @@
-<p>Commit: {{ commitsService.currCommit?.id }}</p>
-<p>Branch: {{ commitsService.currBranch?.name }}</p>
+<p>Commit: {{ sharedService.currCommit?.id }}</p>
+<p>Branch: {{ sharedService.currBranch?.name }}</p>
 
 <router-outlet></router-outlet>
 
@@ -9,4 +9,5 @@
   <app-chart></app-chart>
   <app-commits></app-commits>
 </div>
+
 <app-branches></app-branches>

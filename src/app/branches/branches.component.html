@@ -4,14 +4,14 @@
   <mat-label>New branch name</mat-label>
   <input matInput [(ngModel)]="branchName">
 </mat-form-field>
-<button mat-raised-button (click)="createBranch()" [disabled]="!commitsService.currCommit">Create</button>
+<button mat-raised-button (click)="createBranch()" [disabled]="!sharedService.currCommit">Create</button>
 
 <div class="mat-table mat-elevation-z8">
   <div class="mat-header-row">
     <div class="mat-header-cell">Branch id </div>
     <div class="mat-header-cell">Name</div>
   </div>
-  <div class="mat-row" *ngFor="let branch of commitsService.branches">
+  <div class="mat-row" *ngFor="let branch of sharedService.branches">
     <div class="mat-cell">{{branch.id}}</div>
     <div class="mat-cell">{{branch.name}}</div>
     <div class="mat-cell"><button mat-raised-button color="accent" (click)="checkoutBranch(branch)">Checkout</button></div>

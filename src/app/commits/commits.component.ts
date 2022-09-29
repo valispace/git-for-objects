@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Commit } from '../_core/commits/commits';
 
-import { CommitsService } from '../_core/commits/commits.service';
+import { SharedService } from '../_core/shared/shared.service';
 
 @Component({
   selector: 'app-commits',
@@ -12,14 +12,14 @@ export class CommitsComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'applyJson', 'parent', 'date', 'actions'];
 
-  constructor(public commitsService: CommitsService) { }
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit(): void {
   }
 
   checkoutCommit(commit: Commit): void {
 
-    this.commitsService.checkoutCommit(commit);
+    this.sharedService.checkoutCommit(commit);
   }
 
 }
