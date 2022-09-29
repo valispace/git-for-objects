@@ -10,8 +10,10 @@ import { CommitsService } from './commits.service';
 export class FormComponent implements OnInit {
 
   branch: Branch = {
+    id: 0,
     name: 'Default',
-    commitId: null
+    commitId: null,
+    type: 'branch'
   }
 
   prev: Requirement = {

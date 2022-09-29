@@ -1,8 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 
 import * as GitgraphJS from '@gitgraph/js';
-import { Branch } from '@gitgraph/js';
-import { Commit } from '../types';
 
 @Component({
   selector: 'app-chart',

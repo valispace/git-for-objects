@@ -8,7 +8,7 @@ export interface Requirement {
 
 export interface Commit {
   id: number,
-  type: 'commit',
+  type: string,
   revertJson: string,
   applyJson: string,
   parentId?: number,
@@ -19,7 +19,7 @@ export interface Commit {
 
 export interface Branch {
   id: number,
-  type: 'branch',
+  type: string,
   name: string,
   commitId: number,
 }

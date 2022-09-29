@@ -21,10 +21,13 @@ export class CommitsService {
       id: this.commits.at(-1)?.id ?? 0 + 1,
       revertJson,
       applyJson,
-      parentId: branch.commitId
+      parentId: branch.commitId,
+      type: "commit",
+      author: "",
+      subject: "",
     };
 
-    this.commits.push(commit);
+    this.commits = [...this.commits, commit];
 
     branch.commitId = commit.id;
   }
