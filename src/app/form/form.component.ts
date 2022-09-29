@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Branch, Requirement } from '../types';
-import { CommitsService } from './commits.service';
+
+import { Branch } from '../_core/branches/branches';
+import { CommitsService } from '../_core/commits/commits.service';
+import { Requirement } from '../_core/requirements/requirements';
 
 @Component({
   selector: 'app-form',
@@ -13,7 +15,8 @@ export class FormComponent implements OnInit {
     id: 0,
     name: 'Default',
     commitId: null,
-    type: 'branch'
+    type: 'branch',
+    date: new Date(),
   }
 
   prev: Requirement = {

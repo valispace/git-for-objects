@@ -2,6 +2,9 @@ import { AfterViewInit, Component } from '@angular/core';
 
 import * as GitgraphJS from '@gitgraph/js';
 
+import { BranchesService } from '../_core/branches/branches.service';
+import { CommitsService } from '../_core/commits/commits.service';
+
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -24,51 +27,35 @@ export class AppChartComponent implements AfterViewInit{
     }
   ];
 
+  branches: Map<number, any> = new Map();
+
+  constructor(
+    public branchesService: BranchesService,
+    public commitsService: CommitsService
+  ) {}
+
   ngAfterViewInit(): void {
     const graphContainer = document.getElementById("graph-container");
 
     // Instantiate the graph.
     const gitgraph = GitgraphJS.createGitgraph(graphContainer as HTMLElement);
 
-    // Simulate git commands with Gitgraph API.
-    const master = gitgraph.branch("CC-001");
-    master.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "Initial commit",
-    });
+    const data: any[] = [
+      ...this.branchesService.branches,
+      ...this.commitsService.commits
+    ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
-    const aa = master.branch("CC-001-AA");
-    aa.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "Add AA variant",
-    });
-    aa.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-    aa.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-
-    const v1 = aa.branch("CC-001-AA-1.1");
-    v1.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-    const v2 = aa.branch("CC-001-AA-1.2");
-    v2.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-    v1.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-    v2.commit({
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "...",
-    });
-    //master.merge(develop).tag("v1.0.0");
+    console.log(data);
+    
+    for (let obj of data) {
+      if (obj.type === 'branch') { 
+        const branch = gitgraph.branch(obj);
+        this.branches.set(obj.id, branch);
+      } else {
+        const branch: any = this.branches.get(obj.branchId);
+        console.log(this.branches, branch, obj.id); 
+        branch.commit(obj);
+      }
+    }
   }
 }

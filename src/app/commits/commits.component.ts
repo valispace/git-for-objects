@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommitsService } from '../form/commits.service';
-import { Commit } from '../types';
+
+import { CommitsService } from '../_core/commits/commits.service';
 
 @Component({
   selector: 'app-commits',
@@ -9,7 +9,7 @@ import { Commit } from '../types';
 })
 export class CommitsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'revertJson', 'applyJson', 'parent'];
+  displayedColumns: string[] = ['id', 'revertJson', 'applyJson', 'parent', 'date'];
 
   constructor(public commitsService: CommitsService) { }
 

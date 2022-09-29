@@ -1,0 +1,13 @@
+.branch-container {
+  display: flex;
+  padding: 15px;
+
+  app-chart {
+    width: 600px;
+    overflow: auto;
+  }
+
+  app-commits {
+    flex: 1;
+  }
+}
