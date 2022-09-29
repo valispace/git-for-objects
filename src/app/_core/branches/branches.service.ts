@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
 import { Branch } from "./branches";
 
@@ -38,6 +39,9 @@ export class BranchesService {
       date: new Date(new Date().getDate() + 6),
     }
   ];
+
+  private _branches: Subject<Branch[]> = new Subject();
+  public readonly branches$: Observable<Branch[]> = this._branches.asObservable();
 
   constructor() { }
 

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 
 import { Requirement } from "../requirements/requirements";
 import { Branch } from "../branches/branches";
@@ -101,6 +102,9 @@ export class CommitsService {
     }
   ];
 
+  private _commits: Subject<Commit[]> = new Subject();
+  public readonly commits$: Observable<Commit[]> = this._commits.asObservable();
+
   constructor() { }
 
   createCommit(prev: Requirement, next: Requirement, branch: Branch) {
@@ -109,18 +113,21 @@ export class CommitsService {
 
     const commit = {
       id: this.commits.at(-1)?.id ?? 0 + 1,
+      branchId: 3,
       revertJson,
       applyJson,
-      parentId: branch.commitId,
+      //parentId: branch.commitId,
       type: "commit",
-      author: "",
-      subject: "",
-      date: new Date(),
+      author: "Luís <luis@valispace.com>",
+      subject: "...",
+      date: new Date(new Date().getDate() + 11),
     };
 
     this.commits = [...this.commits, commit];
 
     branch.commitId = commit.id;
+
+    this._commits.next(this.commits);
 
   }
 

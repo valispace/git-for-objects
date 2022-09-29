@@ -1,6 +1,7 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 
 import * as GitgraphJS from '@gitgraph/js';
+import { Subscription } from 'rxjs';
 
 import { BranchesService } from '../_core/branches/branches.service';
 import { CommitsService } from '../_core/commits/commits.service';
@@ -10,52 +11,51 @@ import { CommitsService } from '../_core/commits/commits.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class AppChartComponent implements AfterViewInit{
+export class AppChartComponent implements AfterViewInit, OnDestroy{
 
-  data: any[] = [
-    {
-      id: 0,
-      type: "branch",
-      name: "CC-001",
-    },
-    {
-      id: 0,
-      type: "commit",
-      branchId: 0,
-      author: "Luís Pereira <luis@valispace.com>",
-      subject: "Initial commit",
-    }
-  ];
+  subscriptions: Subscription[];
 
   branches: Map<number, any> = new Map();
+  graphContainer: HTMLElement;
+  gitgraph: any;
 
   constructor(
     public branchesService: BranchesService,
-    public commitsService: CommitsService
+    public commitsService: CommitsService,
   ) {}
 
+  ngOnInit(): void {
+    this.subscriptions = [
+      this.branchesService.branches$.subscribe(() => this.updateGraph()),
+      this.commitsService.commits$.subscribe(() => this.updateGraph())
+    ];
+  }
+
   ngAfterViewInit(): void {
-    const graphContainer = document.getElementById("graph-container");
+    this.graphContainer = document.getElementById("graph-container");
+    this.gitgraph = GitgraphJS.createGitgraph(this.graphContainer as HTMLElement);
+    this.updateGraph(); 
+  }
 
-    // Instantiate the graph.
-    const gitgraph = GitgraphJS.createGitgraph(graphContainer as HTMLElement);
-
+  updateGraph(): void {
     const data: any[] = [
       ...this.branchesService.branches,
       ...this.commitsService.commits
     ].sort((a, b) => a.date.getTime() - b.date.getTime());
 
-    console.log(data);
-    
+    this.gitgraph.clear();
     for (let obj of data) {
       if (obj.type === 'branch') { 
-        const branch = gitgraph.branch(obj);
+        const branch = this.gitgraph.branch(obj);
         this.branches.set(obj.id, branch);
       } else {
         const branch: any = this.branches.get(obj.branchId);
-        console.log(this.branches, branch, obj.id); 
         branch.commit(obj);
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
