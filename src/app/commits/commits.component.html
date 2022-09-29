@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="commitsService.commits" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Commit id </th>
+    <td mat-cell *matCellDef="let commit"> {{commit.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="revertJson">
+    <th mat-header-cell *matHeaderCellDef> Revert json </th>
+    <td mat-cell *matCellDef="let commit"> {{commit.revertJson}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="applyJson">
+    <th mat-header-cell *matHeaderCellDef> Apply json </th>
+    <td mat-cell *matCellDef="let commit"> {{commit.applyJson}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="parent">
+    <th mat-header-cell *matHeaderCellDef> Parent </th>
+    <td mat-cell *matCellDef="let commit"> {{commit.parent}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
