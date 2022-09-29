@@ -5,14 +5,14 @@
     <td mat-cell *matCellDef="let commit"> {{commit.id}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="revertJson">
+  <!-- <ng-container matColumnDef="revertJson">
     <th mat-header-cell *matHeaderCellDef> Revert json </th>
-    <td mat-cell *matCellDef="let commit"> {{commit.revertJson}} </td>
-  </ng-container>
+    <td mat-cell *matCellDef="let commit"> {{commit.revertJson|json}} </td>
+  </ng-container> -->
 
   <ng-container matColumnDef="applyJson">
     <th mat-header-cell *matHeaderCellDef> Apply json </th>
-    <td mat-cell *matCellDef="let commit"> {{commit.applyJson}} </td>
+    <td mat-cell *matCellDef="let commit"> {{commit.applyJson|json}} </td>
   </ng-container>
 
   <ng-container matColumnDef="parent">
@@ -22,7 +22,14 @@
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let commit"> {{commit.date}} </td>
+    <td mat-cell *matCellDef="let commit"> {{commit.date | date}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let commit">
+      <button mat-raised-button color="accent" (click)="checkoutCommit(commit)">Checkout</button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

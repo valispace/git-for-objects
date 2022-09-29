@@ -11,33 +11,29 @@ import { Requirement } from '../_core/requirements/requirements';
 })
 export class FormComponent implements OnInit {
 
-  branch: Branch = {
-    id: 0,
-    name: 'Default',
-    commitId: null,
-    type: 'branch',
-    date: new Date(),
-  }
+  prev: Requirement;
 
-  prev: Requirement = {
-    title: 'Iso thing ',
-    text: 'The thing shall do the x thing',
-    state: 'draft',
-  };
-
-  req: Requirement = {
-    title: 'Iso thing ',
-    text: 'The thing shall do the x thing',
-    state: 'draft',
-  };
+  req: Requirement;
 
   constructor(public commitsService: CommitsService) { }
 
   ngOnInit(): void {
+
+    this.loadReq({});
+
+    this.commitsService.reqChange.subscribe(req => {
+      this.loadReq(req);
+    })
   }
 
 
   save(): void {
-    this.commitsService.createCommit(this.prev, this.req, this.branch);
+    this.commitsService.createCommit(this.prev, this.req);
+    this.loadReq(this.req);
+  }
+
+  private loadReq(req: Requirement): void {
+    this.prev = JSON.parse(JSON.stringify(req));
+    this.req = req;
   }
 }

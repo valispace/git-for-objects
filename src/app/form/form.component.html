@@ -15,4 +15,4 @@
     <mat-option value="final">Final</mat-option>
   </mat-select>
 </mat-form-field>
-<button mat-raised-button color="primary" (click)="save()">Save</button>
+<button mat-raised-button color="primary" (click)="save()" [disabled]="commitsService.currCommit && commitsService.currCommit.id !== commitsService.currBranch.commitId">Save</button>

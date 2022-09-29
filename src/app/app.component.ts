@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommitsService } from './_core/commits/commits.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'git-for-objects';
+
+  constructor(public commitsService: CommitsService) { }
+
+
 }

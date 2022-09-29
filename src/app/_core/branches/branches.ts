@@ -2,6 +2,6 @@ export interface Branch {
   id: number,
   type: string,
   name: string,
-  commitId: number,
+  commitId?: number,
   date: Date,
 }

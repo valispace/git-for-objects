@@ -11,31 +11,31 @@ export class BranchesService {
 
   branches: Branch[] = [
     {
-      id: 0,
-      type: "branch",
-      name: "CC-001",
-      commitId: 0,
-      date: new Date(new Date().getDate() + 0),
-    },
-    {
       id: 1,
       type: "branch",
-      name: "CC-001-AA",
-      commitId: 3,
-      date:  new Date(new Date().getDate() + 2),
+      name: "CC-001",
+      commitId: 1,
+      date: new Date(new Date().getDate() + 0),
     },
     {
       id: 2,
       type: "branch",
-      name: "CC-001-AA-1.1",
-      commitId: 6,
-      date: new Date(new Date().getDate() + 6),
+      name: "CC-001-AA",
+      commitId: 4,
+      date: new Date(new Date().getDate() + 2),
     },
     {
       id: 3,
       type: "branch",
-      name: "CC-001-AA-1.2",
+      name: "CC-001-AA-1.1",
       commitId: 7,
+      date: new Date(new Date().getDate() + 6),
+    },
+    {
+      id: 4,
+      type: "branch",
+      name: "CC-001-AA-1.2",
+      commitId: 8,
       date: new Date(new Date().getDate() + 6),
     }
   ];

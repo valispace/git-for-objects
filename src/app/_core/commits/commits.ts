@@ -1,8 +1,8 @@
 export interface Commit {
   id: number,
   type: string,
-  revertJson: string,
-  applyJson: string,
+  // revertJson: any,
+  applyJson: any,
   parentId?: number,
   branchId?: number,
   author: string,

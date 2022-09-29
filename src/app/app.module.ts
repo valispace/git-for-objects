@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { CommitsComponent } from './commits/commits.component';
+import { BranchesComponent } from './branches/branches.component';
 
 
 
@@ -22,6 +23,7 @@ import { CommitsComponent } from './commits/commits.component';
     AppChartComponent,
     FormComponent,
     CommitsComponent,
+    BranchesComponent,
   ],
   imports: [
     BrowserModule,
