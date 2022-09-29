@@ -19,9 +19,6 @@ export class SharedService {
 
   reqChange = new EventEmitter<Requirement>();
 
-  currBranch: Branch;
-  currCommit: Commit;
-
   branches: Branch[] = [
     {
       id: 1,
@@ -142,6 +139,9 @@ export class SharedService {
       date: new Date(new Date().getDate() + 10),
     }
   ];
+
+  currBranch: Branch = this.branches[0];
+  currCommit: Commit;
 
   checkoutBranch(branch: Branch): void {
     const commit = this.commits.find(c => c.id === branch.commitId);
