@@ -18,6 +18,7 @@ export class AppComponent {
   }
 
   createBranch(): void {
+    this.branchName = '';
     this.sharedService.createBranch(this.sharedService.currCommit, this.branchName);
   }
 
