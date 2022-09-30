@@ -1,11 +1,22 @@
+
+.first-row {
+  display: flex;
+  gap: 30px;
+  app-form {
+    flex: 1;
+  }
+}
+
 .header {
   background-color: #404f5a;
   color: #fff;
-  
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
   >mat-form-field {
     display: inline-block;
     align-items: center;
-    margin-left: 15px;
     color: #fff;
 
     .mat-form-field-wrapper {

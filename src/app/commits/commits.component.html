@@ -17,7 +17,7 @@
 
   <ng-container matColumnDef="parent">
     <th mat-header-cell *matHeaderCellDef> Parent </th>
-    <td mat-cell *matCellDef="let commit"> {{commit.parent}} </td>
+    <td mat-cell *matCellDef="let commit" style="max-width: 40%;"> {{commit.parentId}} </td>
   </ng-container>
 
   <ng-container matColumnDef="date">

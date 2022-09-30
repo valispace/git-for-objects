@@ -16,6 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommitsComponent } from './commits/commits.component';
 import { BranchesComponent } from './branches/branches.component';
 import { FilterCommitsPipe } from './app.pipes';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -39,6 +40,7 @@ import { FilterCommitsPipe } from './app.pipes';
     BrowserAnimationsModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

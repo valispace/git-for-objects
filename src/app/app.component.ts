@@ -10,6 +10,15 @@ import { SharedService } from './_core/shared/shared.service';
 })
 export class AppComponent {
 
+  branchName: string;
+
   constructor(public sharedService: SharedService) { }
+
+  ngOnInit(): void {
+  }
+
+  createBranch(): void {
+    this.sharedService.createBranch(this.sharedService.currCommit, this.branchName);
+  }
 
 }
