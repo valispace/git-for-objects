@@ -46,10 +46,10 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
         const branch = this.gitgraph.branch({
           name: obj.name,
           style: {
-            color: this.sharedService.currBranch.id === obj.id? '#e7961e' : '#cccccc',
+            color: this.sharedService.currBranch.id === obj.id ? '#f2c787' : '#cccccc',
             label: {
-              color: this.sharedService.currBranch.id === obj.id? '#e7961e' : '#cccccc',
-              strokeColor: this.sharedService.currBranch.id === obj.id? '#e7961e' : '#cccccc',
+              color: this.sharedService.currBranch.id === obj.id ? '#e7961e' : '#cccccc',
+              strokeColor: this.sharedService.currBranch.id === obj.id ? '#e7961e' : '#cccccc',
             }
           }
         });
@@ -59,8 +59,16 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
         branch.commit({
           ...obj,
           style: {
-            dot: { color: this.sharedService.currBranch.id === obj.branchId? '#e7961e' : '#979797' },
-            message: { color: this.sharedService.currBranch.id === obj.branchId? '#e7961e' : '#979797' }
+            dot: {
+              color: this.sharedService.currBranch.id === obj.branchId && this.sharedService.currCommit.id === obj.id ? '#e7961e' :
+              this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
+              '#979797'
+            },
+            message: {
+              color: this.sharedService.currBranch.id === obj.branchId && this.sharedService.currCommit.id === obj.id ? '#e7961e' :
+              this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
+              '#979797'
+            }
           }
         });
       }
