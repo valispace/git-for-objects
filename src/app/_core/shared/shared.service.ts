@@ -141,7 +141,7 @@ export class SharedService {
   ];
 
   currBranch: Branch = this.branches[0];
-  currCommit: Commit;
+  currCommit: Commit = this.commits.find(commit => commit.id === this.currBranch.commitId);
 
   checkoutBranch(branch: Branch): void {
     const commit = this.commits.find(c => c.id === branch.commitId);

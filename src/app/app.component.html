@@ -1,5 +1,17 @@
-<p>Commit: {{ sharedService.currCommit?.id }}</p>
-<p>Branch: {{ sharedService.currBranch?.name }}</p>
+<div class="header">
+  <mat-form-field appearance="fill">
+    <mat-label>Branch</mat-label>
+    <mat-select [value]="sharedService.currBranch" (selectionChange)="sharedService.checkoutBranch($event.value)">
+      <mat-option *ngFor="let branch of sharedService.branches" [value]="branch">{{branch.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Commit</mat-label>
+    <mat-select [value]="sharedService.currCommit" (selectionChange)="sharedService.checkoutCommit($event.value)">
+      <mat-option *ngFor="let commit of sharedService.commits|filterCommits:sharedService.currBranch" [value]="commit">{{commit.subject}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 
 <router-outlet></router-outlet>
 

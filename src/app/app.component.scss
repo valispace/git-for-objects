@@ -1,3 +1,29 @@
+.header {
+  background-color: #404f5a;
+  color: #fff;
+  
+  >mat-form-field {
+    display: inline-block;
+    align-items: center;
+    margin-left: 15px;
+    color: #fff;
+
+    .mat-form-field-wrapper {
+      padding-top: 1.34375em;
+    }
+
+    .mat-select-arrow,
+    .mat-select-value,
+    .mat-form-field-label {
+      color: #ccc !important;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+}
+
 .branch-container {
   display: flex;
   padding: 15px;

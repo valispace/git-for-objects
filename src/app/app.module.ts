@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { CommitsComponent } from './commits/commits.component';
 import { BranchesComponent } from './branches/branches.component';
+import { FilterCommitsPipe } from './app.pipes';
 
 
 
@@ -24,6 +25,7 @@ import { BranchesComponent } from './branches/branches.component';
     FormComponent,
     CommitsComponent,
     BranchesComponent,
+    FilterCommitsPipe,
   ],
   imports: [
     BrowserModule,
