@@ -1,5 +1,5 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 import { Branch } from "../branches/branches";
 import { Commit } from "../commits/commits";
@@ -17,7 +17,8 @@ export class SharedService {
   private _commits: Subject<Commit[]> = new Subject();
   public readonly commits$: Observable<Commit[]> = this._commits.asObservable();
 
-  reqChange = new EventEmitter<Requirement>();
+  private _reqChange: BehaviorSubject<any> = new BehaviorSubject({});
+  public readonly reqChange: Observable<any> = this._reqChange.asObservable();
 
   branches: Branch[] = [
     {
@@ -221,11 +222,16 @@ export class SharedService {
       id: (this.branches.at(-1)?.id ?? 0) + 1,
       type: 'branch',
       name,
-      commitId: commit.id,
-      date: new Date()
+      date: new Date(new Date().getDate() + 11),
     };
 
     this.branches = [...this.branches, branch];
+    
+    this.createCommit(
+      branch,
+      this._reqChange.getValue(),
+      this.currCommit.applyJson,
+    );
 
     this.checkoutBranch(branch);
   }
@@ -236,12 +242,12 @@ export class SharedService {
     const commit: Commit = {
       id: (this.commits.at(-1)?.id ?? 0) + 1,
       applyJson,
-      parentId: branch.commitId,
+      parentId: this.currCommit.id,
       branchId: branch.id,
       type: "commit",
       author: "Luís <luis@valispace.com>",
       subject: "...",
-      date: new Date()
+      date: new Date(new Date().getDate() + 11),
     };
 
     this.commits = [...this.commits, commit];
@@ -286,6 +292,6 @@ export class SharedService {
       req = Object.assign(req, commit.applyJson);
     }
 
-    this.reqChange.emit(req);
+    this._reqChange.next(req);
   }
 }
