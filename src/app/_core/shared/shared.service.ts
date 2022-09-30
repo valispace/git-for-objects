@@ -60,7 +60,7 @@ export class SharedService {
       id: 2,
       branchId: 1,
       applyJson: {
-        state: 'Draft'
+        state: 'draft'
       },
       parentId: 1,
       type: "commit",
