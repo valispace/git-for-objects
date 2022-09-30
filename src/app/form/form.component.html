@@ -15,4 +15,7 @@
     <mat-option value="final">Final</mat-option>
   </mat-select>
 </mat-form-field>
+<p>
+  <mat-slide-toggle [(ngModel)]="req.verified">Is verified</mat-slide-toggle>
+</p>
 <button mat-raised-button color="primary" (click)="save()" [disabled]="sharedService.currCommit && sharedService.currCommit.id !== sharedService.currBranch.commitId">Save</button>

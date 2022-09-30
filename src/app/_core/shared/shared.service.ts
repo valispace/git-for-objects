@@ -23,39 +23,33 @@ export class SharedService {
     {
       id: 1,
       type: "branch",
-      name: "CC-001",
-      commitId: 1,
+      name: "Default",
+      commitId: 10,
       date: new Date(new Date().getDate() + 0),
     },
     {
       id: 2,
       type: "branch",
-      name: "CC-001-AA",
-      commitId: 4,
+      name: "AA",
+      commitId: 7,
       date: new Date(new Date().getDate() + 2),
     },
     {
       id: 3,
       type: "branch",
-      name: "CC-001-AA-1.1",
-      commitId: 7,
+      name: "AB-02",
+      commitId: 13,
       date: new Date(new Date().getDate() + 6),
     },
-    {
-      id: 4,
-      type: "branch",
-      name: "CC-001-AA-1.2",
-      commitId: 8,
-      date: new Date(new Date().getDate() + 6),
-    }
   ];
   commits: Commit[] = [
     {
       id: 1,
       branchId: 1,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      applyJson: {
+        title: 'Cruse control'
+      },
+      parentId: null,
       type: "commit",
       author: "Cyrill <cyrill@valispace.com>",
       subject: "Initial commit",
@@ -63,85 +57,158 @@ export class SharedService {
     },
     {
       id: 2,
+      branchId: 1,
+      applyJson: {
+        state: 'Draft'
+      },
+      parentId: 1,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "Second",
+      date: new Date(new Date().getDate() + 1),
+    },
+    {
+      id: 3,
+      branchId: 1,
+      applyJson: {
+        text: 'WIP'
+      },
+      parentId: 2,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "Second",
+      date: new Date(new Date().getDate() + 1),
+    },
+    {
+      id: 4,
       branchId: 2,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      applyJson: {
+        title: 'Cruse control AA'
+      },
+      parentId: 3,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "Initial commit",
+      date: new Date(new Date().getDate() + 3),
+    },
+    {
+      id: 5,
+      branchId: 2,
+      applyJson: {
+        text: 'Cruise Control Basic - Controls vehicle to a set speed and requires driver intervention to avoid object ahead or prevent overspeed on excessive gradients'
+      },
+      parentId: 4,
       type: "commit",
       author: "Cyrill <cyrill@valispace.com>",
       subject: "...",
       date: new Date(new Date().getDate() + 3),
     },
     {
-      id: 3,
+      id: 6,
       branchId: 2,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      applyJson: {
+        state: 'wip'
+      },
+      parentId: 5,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "...",
+      date: new Date(new Date().getDate() + 3),
+    },
+    {
+      id: 7,
+      branchId: 2,
+      applyJson: {
+        verified: true
+      },
+      parentId: 6,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "...",
+      date: new Date(new Date().getDate() + 3),
+    },
+    {
+      id: 8,
+      branchId: 1,
+      applyJson: {
+        title: 'Cruse control AB'
+      },
+      parentId: 3,
       type: "commit",
       author: "Cyrill <cyrill@valispace.com>",
       subject: "...",
       date: new Date(new Date().getDate() + 4),
     },
     {
-      id: 4,
-      branchId: 2,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      id: 9,
+      branchId: 1,
+      applyJson: {
+        text: 'Cruise Control Brake - Controls vehicle to a set speed and requires driver intervention to avoid object ahead, will maintain speed on gradients using brakes.'
+      },
+      parentId: 8,
       type: "commit",
       author: "Cyrill <cyrill@valispace.com>",
       subject: "...",
-      date: new Date(new Date().getDate() + 5),
+      date: new Date(new Date().getDate() + 4),
     },
     {
-      id: 5,
+      id: 10,
+      branchId: 1,
+      applyJson: {
+        verified: true
+      },
+      parentId: 9,
+      type: "commit",
+      author: "Cyrill <cyrill@valispace.com>",
+      subject: "...",
+      date: new Date(new Date().getDate() + 4),
+    },
+    {
+      id: 11,
       branchId: 3,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      applyJson: {
+        title: 'Cruse control AB version 2'
+      },
+      parentId: 9,
       type: "commit",
       author: "Luís <luis@valispace.com>",
       subject: "Initial commit",
       date: new Date(new Date().getDate() + 7),
     },
     {
-      id: 6,
-      branchId: 4,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
-      type: "commit",
-      author: "Francisco <francisco@valispace.com>",
-      subject: "Initial commit",
-      date: new Date(new Date().getDate() + 8),
-    },
-    {
-      id: 7,
+      id: 12,
       branchId: 3,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      applyJson: {
+        text: 'not done yet'
+      },
+      parentId: 11,
       type: "commit",
       author: "Luís <luis@valispace.com>",
-      subject: "...",
-      date: new Date(new Date().getDate() + 9),
+      subject: "Initial commit",
+      date: new Date(new Date().getDate() + 7),
     },
     {
-      id: 8,
-      branchId: 4,
-      // revertJson: "{}",
-      applyJson: "{}",
-      //parentId: branch.commitId,
+      id: 13,
+      branchId: 3,
+      applyJson: {
+        state: 'final'
+      },
+      parentId: 11,
       type: "commit",
-      author: "Francisco <francisco@valispace.com>",
-      subject: "...",
-      date: new Date(new Date().getDate() + 10),
-    }
+      author: "Luís <luis@valispace.com>",
+      subject: "Initial commit",
+      date: new Date(new Date().getDate() + 7),
+    },
   ];
 
   currBranch: Branch = this.branches[0];
   currCommit: Commit = this.commits.find(commit => commit.id === this.currBranch.commitId);
+
+  constructor() {
+    setTimeout(() => {
+      this.checkoutCommit(this.commits.find(c => c.id === 10));
+    }, 20);
+  }
 
   checkoutBranch(branch: Branch): void {
     const commit = this.commits.find(c => c.id === branch.commitId);
@@ -163,12 +230,11 @@ export class SharedService {
     this.checkoutBranch(branch);
   }
 
-  createCommit(branch: Branch, prev: Requirement, next: Requirement) {
+  createCommit(branch: Branch, prev: Requirement, next: Requirement,) {
     const [revertJson, applyJson] = this.difference(prev, next);
 
     const commit: Commit = {
       id: (this.commits.at(-1)?.id ?? 0) + 1,
-      // revertJson,
       applyJson,
       parentId: branch.commitId,
       branchId: branch.id,

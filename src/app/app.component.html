@@ -8,7 +8,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Commit</mat-label>
     <mat-select [value]="sharedService.currCommit" (selectionChange)="sharedService.checkoutCommit($event.value)">
-      <mat-option *ngFor="let commit of sharedService.commits|filterCommits:sharedService.currBranch" [value]="commit">{{commit.subject}}</mat-option>
+      <mat-option *ngFor="let commit of sharedService.commits|filterCommits:sharedService.currBranch" [value]="commit">{{commit.id}}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CommitsComponent } from './commits/commits.component';
 import { BranchesComponent } from './branches/branches.component';
 import { FilterCommitsPipe } from './app.pipes';
@@ -37,6 +38,7 @@ import { FilterCommitsPipe } from './app.pipes';
     FormsModule,
     BrowserAnimationsModule,
     MatTableModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
