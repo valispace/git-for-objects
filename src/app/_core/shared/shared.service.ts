@@ -226,7 +226,7 @@ export class SharedService {
     };
 
     this.branches = [...this.branches, branch];
-    
+
     this.createCommit(
       branch,
       this._reqChange.getValue(),
@@ -293,5 +293,32 @@ export class SharedService {
     }
 
     this._reqChange.next(req);
+  }
+
+  deleteCommit(commitToDelete: Commit): void {
+
+    const i = this.commits.indexOf(commitToDelete);
+    this.commits.splice(i, 1);
+
+    for (const c of this.commits) {
+      if (c.parentId === commitToDelete.id) {
+        c.parentId = commitToDelete.parentId;
+      }
+    }
+
+    for (const b of this.branches) {
+      if (b.commitId === commitToDelete.id) {
+        b.commitId = commitToDelete.parentId;
+      }
+    }
+
+    this.commits = this.commits.slice();
+
+    if (this.currCommit.id === commitToDelete.id) {
+      const parent = this.commits.find(c => c.id === commitToDelete.parentId);
+      this.checkoutCommit(parent);
+    } else {
+      this.checkoutCommit(this.currCommit);
+    }
   }
 }

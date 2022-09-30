@@ -17,6 +17,8 @@ import { CommitsComponent } from './commits/commits.component';
 import { BranchesComponent } from './branches/branches.component';
 import { FilterCommitsPipe } from './app.pipes';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 
 
@@ -41,6 +43,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatSlideToggleModule,
     MatIconModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

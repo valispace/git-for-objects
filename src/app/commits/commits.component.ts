@@ -18,8 +18,10 @@ export class CommitsComponent implements OnInit {
   }
 
   checkoutCommit(commit: Commit): void {
-
     this.sharedService.checkoutCommit(commit);
   }
 
+  deleteCommit(commit: Commit): void {
+    this.sharedService.deleteCommit(commit);
+  }
 }

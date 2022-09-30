@@ -28,7 +28,8 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> </th>
     <td mat-cell *matCellDef="let commit">
-      <button *ngIf="commit !== sharedService.currCommit" mat-raised-button color="accent" (click)="checkoutCommit(commit)">Checkout</button>
+      <button style="margin-right: 10px"  *ngIf="commit !== sharedService.currCommit" mat-raised-button color="accent" (click)="checkoutCommit(commit)">Checkout</button>
+      <button *ngIf="commit.id !== 1" mat-raised-button color="warn" (click)="deleteCommit(commit)">Delete!</button>
     </td>
   </ng-container>
 

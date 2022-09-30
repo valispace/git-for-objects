@@ -10,7 +10,7 @@ import { SharedService } from '../_core/shared/shared.service';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class AppChartComponent implements AfterViewInit, OnDestroy{
+export class AppChartComponent implements AfterViewInit, OnDestroy {
 
   subscriptions: Subscription[];
 
@@ -18,7 +18,7 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
   graphContainer: HTMLElement;
   gitgraph: any;
 
-  constructor(public sharedService: SharedService) {}
+  constructor(public sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.subscriptions = [
@@ -31,7 +31,7 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
   ngAfterViewInit(): void {
     this.graphContainer = document.getElementById("graph-container");
     this.gitgraph = GitgraphJS.createGitgraph(this.graphContainer as HTMLElement);
-    this.updateGraph(); 
+    this.updateGraph();
   }
 
   updateGraph(): void {
@@ -61,13 +61,13 @@ export class AppChartComponent implements AfterViewInit, OnDestroy{
           style: {
             dot: {
               color: this.sharedService.currBranch.id === obj.branchId && this.sharedService.currCommit.id === obj.id ? '#e7961e' :
-              this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
-              '#979797'
+                this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
+                  '#979797'
             },
             message: {
               color: this.sharedService.currBranch.id === obj.branchId && this.sharedService.currCommit.id === obj.id ? '#e7961e' :
-              this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
-              '#979797'
+                this.sharedService.currBranch.id === obj.branchId ? '#f2c787' :
+                  '#979797'
             }
           }
         });
