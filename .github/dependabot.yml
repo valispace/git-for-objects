@@ -1,0 +1,86 @@
+version: 2
+updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "valispace/automations"
+
+  # Maintain dependencies for Docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    reviewers:
+      - "valispace/operations"
+
+  # Maintain dependencies for Python
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "pyparsing"
+        versions: [">2.x"] # cannot update further without breaking integration with pint
+      - dependency-name: "pylint"
+        versions: [">2.14.x"] # cannot update further without breaking integration with pylint-django-2.5.3
+    reviewers:
+      - "valispace/developers"
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "daily"
+    ignore:
+      # Wildcards match zero or more arbitrary characters
+      # // All base Angular packages. Leaving @angular/core for the warning.
+      - dependency-name: "@angular-devkit/build-angular"
+      - dependency-name: "@angular/animations"
+      - dependency-name: "@angular/cli"
+      - dependency-name: "@angular/cdk"
+      - dependency-name: "@angular/common"
+      - dependency-name: "@angular/compiler"
+      - dependency-name: "@angular/compiler-cli"
+      - dependency-name: "@angular/forms"
+      - dependency-name: "@angular/platform-browser"
+      - dependency-name: "@angular/platform-browser-dynamic"
+      - dependency-name: "@angular/material-moment-adapter"
+      - dependency-name: "@angular/router"
+      - dependency-name: "@storybook/addon-actions"
+      - dependency-name: "@storybook/addon-essentials"
+      - dependency-name: "@storybook/addon-interactions"
+      - dependency-name: "@storybook/addon-links"
+      - dependency-name: "@storybook/angular"
+      - dependency-name: "@storybook/builder-webpack5"
+      - dependency-name: "@storybook/manager-webpack5"
+      - dependency-name: "@storybook/testing-library"
+      - dependency-name: "@types/jasmine"
+      - dependency-name: "@types/node"
+      - dependency-name: "ag-grid-enterprise"
+      - dependency-name: "jasmine-core"
+      - dependency-name: "karma"
+      - dependency-name: "karma-chrome-launcher"
+      - dependency-name: "karma-coverage"
+      - dependency-name: "karma-jasmine"
+      - dependency-name: "karma-jasmine-html-reporter"
+      - dependency-name: "rxjs"
+      - dependency-name: "storybook-addon-mock" 
+      - dependency-name: "tslib"
+      - dependency-name: "typescript"
+      - dependency-name: "zone.js"
+      #// ESLint related packages. Leaving @angular-eslint/schematics for the warning.
+      - dependency-name: "@angular-eslint/builder"
+      - dependency-name: "@angular-eslint/eslint-plugin"
+      - dependency-name: "@angular-eslint/eslint-plugin-template"
+      - dependency-name: "@angular-eslint/template-parser"
+      - dependency-name: "@typescript-eslint/eslint-plugin"
+      - dependency-name: "@typescript-eslint/parser"
+      - dependency-name: "eslint"
+      - dependency-name: "eslint-plugin-storybook"
+    reviewers:
+      - "valispace/developers"
+
